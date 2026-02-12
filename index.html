@@ -1,4 +1,509 @@
-<h1>TD STAPS</h1>
-<a href="TD1.1.html">TD Tennis</a>
-<br>
-<a href="TD1.2.html">TD Basket</a>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TD STAPS – Accueil</title>
+
+  <style>
+    :root{
+      --bg:#f8f9fb;
+      --bg-card:#ffffff;
+      --bg-soft:#f1f1f5;
+      --text:#2c2c2c;
+      --text-soft:#6b6b6b;
+      --border:#d8d8df;
+
+      --accent-1:#7a2e55;
+      --accent-2:#a45fa1;
+      --accent-3:#416ea5;
+
+      --ok:#3aa66b;
+      --bad:#d04c4c;
+
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --shadow-soft: 0 4px 14px rgba(0,0,0,0.06);
+      --radius: 18px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1000px 600px at 10% -10%, rgba(164,95,161,0.14), transparent 55%),
+        radial-gradient(900px 520px at 110% 20%, rgba(65,110,165,0.16), transparent 55%),
+        radial-gradient(900px 520px at 40% 120%, rgba(122,46,85,0.12), transparent 60%),
+        var(--bg);
+      min-height:100vh;
+    }
+
+    /* HEADER */
+    header{
+      padding: 22px 20px 16px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(135deg, #ffffff, #f3ecf4 60%, #eceef7);
+    }
+    .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .top{
+      display:flex;
+      gap:16px;
+      align-items:flex-start;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .brand{
+      display:flex;
+      gap:14px;
+      align-items:center;
+    }
+    .logo{
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.2) 55%),
+        linear-gradient(135deg, var(--accent-1), var(--accent-3));
+      box-shadow: var(--shadow-soft);
+      position:relative;
+      overflow:hidden;
+    }
+    .logo:after{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.35), transparent);
+      transform: rotate(20deg);
+      animation: shine 3.2s ease-in-out infinite;
+    }
+    @keyframes shine{
+      0%{transform: translateX(-30%) rotate(20deg)}
+      55%{transform: translateX(30%) rotate(20deg)}
+      100%{transform: translateX(30%) rotate(20deg)}
+    }
+
+    h1{
+      margin:0;
+      font-size:1.55rem;
+      font-weight: 720;
+      letter-spacing: -0.02em;
+      color: var(--accent-1);
+    }
+    .subtitle{
+      margin:4px 0 0;
+      color: var(--text-soft);
+      font-size:0.95rem;
+    }
+
+    .pillbar{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:flex-end;
+      margin-top:6px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(8px);
+      border-radius: 999px;
+      box-shadow: var(--shadow-soft);
+      font-size: 0.86rem;
+      color: var(--text-soft);
+      user-select:none;
+    }
+    .dot{
+      width:9px;height:9px;border-radius:999px;
+      background: var(--accent-3);
+      box-shadow: 0 0 0 4px rgba(65,110,165,0.12);
+    }
+
+    /* MAIN */
+    main{ padding: 18px 20px 24px; }
+    .grid{
+      display:grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      gap: 16px;
+      align-items:start;
+    }
+    @media (max-width: 980px){
+      .grid{ grid-template-columns:1fr; }
+    }
+
+    .card{
+      background: rgba(255,255,255,0.86);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+    .card h2{
+      margin:0 0 8px;
+      font-size: 1.18rem;
+      color: var(--accent-1);
+      letter-spacing:-0.01em;
+    }
+    .small{ color: var(--text-soft); font-size:0.9rem; line-height:1.35; }
+    .strong{ font-weight:700; color: var(--text); }
+
+    /* TD cards */
+    .td-list{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+    @media (max-width: 800px){
+      .td-list{ grid-template-columns:1fr; }
+    }
+
+    .td{
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow:hidden;
+      background: var(--bg-card);
+      box-shadow: var(--shadow-soft);
+      transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+      position:relative;
+    }
+    .td:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.10);
+      border-color: rgba(65,110,165,0.35);
+    }
+    .td-head{
+      padding: 14px 14px 12px;
+      background:
+        radial-gradient(700px 240px at 10% -30%, rgba(164,95,161,0.20), transparent 60%),
+        radial-gradient(700px 240px at 120% 10%, rgba(65,110,165,0.18), transparent 60%),
+        linear-gradient(135deg, #ffffff, #f6f6fb);
+      border-bottom: 1px solid var(--border);
+    }
+    .td-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.75);
+      color: var(--text-soft);
+      font-size: 0.82rem;
+      margin-bottom: 8px;
+    }
+    .td-title{
+      margin:0;
+      font-size: 1.05rem;
+      font-weight: 750;
+      color: var(--accent-1);
+      letter-spacing: -0.01em;
+    }
+    .td-desc{
+      margin:6px 0 0;
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      line-height:1.35;
+    }
+    .td-body{
+      padding: 12px 14px 14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .meta{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+      color: var(--text-soft);
+      font-size:0.84rem;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border:1px solid var(--border);
+      background: var(--bg-soft);
+      border-radius: 999px;
+      white-space:nowrap;
+    }
+
+    /* buttons */
+    .actions{ display:flex; gap:10px; align-items:center; }
+    a.btn{
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: none;
+      cursor:pointer;
+      font-weight: 720;
+      font-size: 0.92rem;
+      background: var(--accent-3);
+      color: #fff;
+      transition: filter .15s ease, transform .15s ease;
+      box-shadow: 0 10px 22px rgba(65,110,165,0.22);
+    }
+    a.btn:hover{ filter: brightness(1.08); transform: translateY(-1px); }
+    a.btn.secondary{
+      background: var(--accent-2);
+      box-shadow: 0 10px 22px rgba(164,95,161,0.22);
+    }
+
+    /* right column */
+    .info{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .kpi{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .kpi .box{
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 12px;
+      box-shadow: var(--shadow-soft);
+    }
+    .kpi .big{
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--accent-1);
+      letter-spacing:-0.02em;
+      margin:0;
+    }
+    .kpi .lab{
+      margin:4px 0 0;
+      color: var(--text-soft);
+      font-size:0.85rem;
+    }
+
+    .tip{
+      border-left: 4px solid var(--accent-3);
+      background: #eef6ff;
+      border-radius: 14px;
+      padding: 12px;
+      color: var(--text);
+    }
+    .tip h3{
+      margin:0 0 6px;
+      color: var(--accent-3);
+      font-size: 0.98rem;
+    }
+
+    .copy{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      margin-top: 10px;
+      flex-wrap:wrap;
+    }
+    input[type="text"]{
+      flex: 1;
+      min-width: 240px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+      font-size: 0.92rem;
+      color: var(--text);
+    }
+    button.copybtn{
+      border: none;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: var(--accent-1);
+      color:#fff;
+      font-weight: 750;
+      cursor:pointer;
+      transition: filter .15s ease, transform .15s ease;
+      box-shadow: 0 10px 22px rgba(122,46,85,0.20);
+    }
+    button.copybtn:hover{ filter: brightness(1.06); transform: translateY(-1px); }
+
+    footer{
+      text-align:center;
+      padding: 16px 20px 26px;
+      color: var(--text-soft);
+      font-size: 0.88rem;
+    }
+    .mini{
+      opacity:0.9;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="wrap">
+      <div class="top">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <h1>TD STAPS – Plateforme TD</h1>
+            <p class="subtitle">L1 STAPS LASSR · Sciences de l’ingénieur · Trajectoires · Modèles · Énergie</p>
+          </div>
+        </div>
+
+        <div class="pillbar">
+          <div class="pill"><span class="dot"></span> Accès rapide</div>
+          <div class="pill">📱 Compatible mobile</div>
+          <div class="pill">🧠 TD interactifs</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <div class="grid">
+
+        <!-- COLONNE PRINCIPALE -->
+        <section class="card">
+          <h2>Choisis ton TD</h2>
+          <p class="small">
+            Clique sur un TD pour l’ouvrir dans ton navigateur.
+            <span class="strong">Réponds aux questions</span>, lance les simulateurs, puis (si autorisé) ouvre les corrections.
+          </p>
+
+          <div class="td-list">
+
+            <!-- TD 1 -->
+            <article class="td">
+              <div class="td-head">
+                <div class="td-badge">🎾 <span>Service au tennis</span> · <span>Bac 2022</span></div>
+                <h3 class="td-title">TD 1.1 – Tennis : trajectoire & validation du service</h3>
+                <p class="td-desc">
+                  Modélisation « à plat », hauteur de frappe, vitesse initiale, filet et zone de service.
+                </p>
+              </div>
+              <div class="td-body">
+                <div class="meta">
+                  <span class="chip">⏱️ ~20–30 min</span>
+                  <span class="chip">📌 Simulateur + QCM</span>
+                </div>
+                <div class="actions">
+                  <a class="btn" href="TD1.1.html">Ouvrir</a>
+                  <a class="btn secondary" href="TD1.1.html#teacher-lock">Mode enseignant</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- TD 2 -->
+            <article class="td">
+              <div class="td-head">
+                <div class="td-badge">🏀 <span>Lancer franc</span> · <span>Bac 2024</span></div>
+                <h3 class="td-title">TD 1.2 – Basket : trajectoire, parabole & panier</h3>
+                <p class="td-desc">
+                  Mouvement parabolique, équations horaires, condition d’entrée dans l’arceau + questions.
+                </p>
+              </div>
+              <div class="td-body">
+                <div class="meta">
+                  <span class="chip">⏱️ ~25–35 min</span>
+                  <span class="chip">📌 Simulateur + corrections</span>
+                </div>
+                <div class="actions">
+                  <a class="btn" href="TD1.2.html">Ouvrir</a>
+                  <a class="btn secondary" href="TD1.2.html#teacher-lock">Mode enseignant</a>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- COLONNE DROITE -->
+        <aside class="info">
+          <section class="card">
+            <h2>Infos rapides</h2>
+            <p class="small">
+              Si tu as un souci d’affichage : recharge la page, ou essaye Chrome / Safari.
+            </p>
+
+            <div class="kpi">
+              <div class="box">
+                <p class="big">2</p>
+                <p class="lab">TD disponibles</p>
+              </div>
+              <div class="box">
+                <p class="big">100%</p>
+                <p class="lab">Web (sans téléchargement)</p>
+              </div>
+            </div>
+
+            <div class="tip" style="margin-top:12px;">
+              <h3>Conseil en CM</h3>
+              <div class="small" style="color:#2c2c2c;">
+                Ouvre d’abord un TD, puis mets-le en plein écran.  
+                Les corrections peuvent être verrouillées par code (mode enseignant).
+              </div>
+            </div>
+          </section>
+
+          <section class="card">
+            <h2>Partager le lien</h2>
+            <p class="small">Copie-colle ce lien sur le diapo / Teams / Moodle :</p>
+
+            <div class="copy">
+              <input id="shareLink" type="text" value="https://yannasse42.github.io/TD/" readonly />
+              <button class="copybtn" id="copyBtn" type="button">Copier</button>
+            </div>
+
+            <p class="small mini" id="copyStatus" style="margin-top:10px;"></p>
+          </section>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap mini">
+      © 2026 · TD STAPS – Yannasse42 · Version web GitHub Pages
+    </div>
+  </footer>
+
+  <script>
+    // Bouton copier
+    const btn = document.getElementById("copyBtn");
+    const input = document.getElementById("shareLink");
+    const status = document.getElementById("copyStatus");
+
+    btn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(input.value);
+        status.textContent = "✔ Lien copié. Tu peux le coller où tu veux.";
+        status.style.color = "var(--ok)";
+      } catch (e) {
+        // fallback
+        input.select();
+        document.execCommand("copy");
+        status.textContent = "✔ Lien copié (mode compatibilité).";
+        status.style.color = "var(--ok)";
+      }
+      setTimeout(() => (status.textContent = ""), 2500);
+    });
+  </script>
+</body>
+</html>
